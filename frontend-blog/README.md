@@ -94,7 +94,7 @@ Inside the `src` folder create this folders:
 - `utils` folder, for usefull repetitive functions
 - `pages` folder, for all your pages
 
-```json
+```code
 .
 ├── ./node_modules
 ├── ./public
