@@ -1,18 +1,21 @@
 # MERN BLOG APP
 
-## Install the project
+## How to install the project
 
-- create a folder mern-react-blog
-
+- create a folder `mern-react-blog`
 - Navigate to `mern-react-blog` folder and run this commands:
 
 ```js
 npm create vite@latest frontend-blog -- --template react
 ```
 
+Navigate to the `frontend-blog` folder
+
 ```powershell
 cd frontend-blog
 ```
+
+Inside the `frontend-blog` folder run this command, to install node packages:
 
 ```cd frontend-blog
 npm install
@@ -62,7 +65,23 @@ Open `App.jsx` and remove all the imports
 
 ## Create project structure
 
-Inside the src folder create this folders:
+Inside the `src` folder create this folders:
+
+.
+├── node_modules
+├── public
+└── src/
+├── assets
+├── components/
+│ ├── Footer.jsx
+│ ├── Header.jsx
+│ └── MainLayout.jsx
+├── constants
+├── hooks
+├── pages
+├── services
+├── store
+└── utils
 
 - components folder in the src foder
 - assets in the source folder
@@ -72,3 +91,16 @@ Inside the src folder create this folders:
 - constants folder, for all of all constant variables
 - utils folder, for usefull repetitive functions
 - pages folder
+
+## MERN stack Blog app using Tailwind CSS - 2 - setup project
+
+https://www.youtube.com/watch?v=_vKFcLxuwoQ
+3:51
+
+- setup a HomePage.jsx
+
+Note:
+
+- install Tailwind CSS IntelliSense - https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
+
+- Tailwind CSS IntelliSense - https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
