@@ -29,7 +29,19 @@ code .
 npm run dev
 ```
 
+## Cleanup structure folder and files
+
+- Remove all the code in `App.css` and `index.css`
+- Remove `reportWebVitals` file and all imports
+- Remove `logo.svg` and all imports
+
 ## Tailwind css installation
+
+In the next steps, please refer to `tailwindccs` page documentation
+
+- https://tailwindcss.com/docs/installation
+
+Install tailwindcss via npm, and create your `tailwind.config.js` file.
 
 ```powershell
 npm install -D tailwindcss postcss autoprefixer
@@ -49,7 +61,7 @@ export default {
 };
 ```
 
-Open index.css file and remove everything, then past the source code:
+Open `index.css` file and remove everything, then past the source code:
 
 ```js
 @tailwind base;
@@ -57,40 +69,48 @@ Open index.css file and remove everything, then past the source code:
 @tailwind utilities;
 ```
 
-Open `App.jsx` and remove all the imports
+Open `App.jsx` and remove all the imports. Remove the code in there between the `div` and past this code:
 
 ```html
-<div className="w-screen h-screen bg-red-300"></div>
+<div
+  className="w-screen h-screen bg-orange-200 background-color: rgb(226 232 240"
+>
+  <h2 className="text-red-500 text-5xl">Hello world</h2>
+</div>
 ```
+
+> Note: in order for this changes take effect, you must restart the server
 
 ## Create project structure
 
 Inside the `src` folder create this folders:
 
-.
-├── node_modules
-├── public
-└── src/
-├── assets
-├── components/
-│ ├── Footer.jsx
-│ ├── Header.jsx
-│ └── MainLayout.jsx
-├── constants
-├── hooks
-├── pages
-├── services
-├── store
-└── utils
+- `components` folder
+- `assets` folder for all fonts and images
+- `hooks` folder for your custom hooks
+- `store` folder in order to use with redux, inside the context api, for managing global state
+- `services` folder for organizing api routes
+- `constants` folder, for all your constants variables
+- `utils` folder, for usefull repetitive functions
+- `pages` folder, for all your pages
 
-- components folder in the src foder
-- assets in the source folder
-- hooks folder in the src folder
-- store folder to use redux
-- services folder for organizing api routes
-- constants folder, for all of all constant variables
-- utils folder, for usefull repetitive functions
-- pages folder
+```json
+.
+├── ./node_modules
+├── ./public
+└── ./src/
+    ├── ./src/assets
+    ├── ./src/components/
+    │   ├── ./src/components/Footer.jsx
+    │   ├── ./src/components/Header.jsx
+    │   └── ./src/components/MainLayout.jsx
+    ├── ./src/constants
+    ├── ./src/hooks
+    ├── ./src/pages
+    ├── ./src/services
+    ├── ./src/store
+    └── ./src/utils
+```
 
 ## MERN stack Blog app using Tailwind CSS - 2 - setup project
 
@@ -104,3 +124,9 @@ Note:
 - install Tailwind CSS IntelliSense - https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
 
 - Tailwind CSS IntelliSense - https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss
+
+# SPECIAL FEATURES USED in This Document
+
+- https://tree.nathanfriend.io/
+
+  An online tree-like utility for generating ASCII folder structure diagrams. Written in TypeScript and React.
