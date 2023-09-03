@@ -227,7 +227,7 @@ const images = {
 export default images;
 ```
 
-Inside `constants` folder create an `index.jsx` file and paste this code:
+Inside `constants` folder create another file and name it `index.jsx` file and paste this code:
 
 ```js
 export { default as images } from './images';
@@ -398,7 +398,189 @@ export default Header;
 
 ### MERN stack Blog app using Tailwind CSS - 4 - Responsive Header
 
-- setup a HomePage.jsx
+Open `tailwind.config.js` file and modify
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#1565D8',
+        dark: {
+          hard: '#0D2436',
+          soft: '#183B56',
+        },
+      },
+      fontFamily: {
+        opensans: [],
+        roboto: [],
+      },
+    },
+  },
+  plugins: [],
+};
+```
+
+Download `Roboto` and `Open Sans` fonts from google fonts
+
+https://fonts.google.com/
+
+Open `App.css` and past the code below
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+```
+
+Open `tailwind.config.js` file again and add fonts array for global styles
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#1565D8',
+        dark: {
+          hard: '#0D2436',
+          soft: '#183B56',
+        },
+      },
+      fontFamily: {
+        opensans: ['Open Sans', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [],
+};
+```
+
+Open `App.jsx` and modify the file so that the project use the general font `font-opensans`
+
+```js
+import './App.css';
+
+function App() {
+  return (
+    <div className="App font-opensans">
+      <HomePage />
+    </div>
+  );
+}
+
+export default App;
+```
+
+Modify the `header` so that can be responsive
+
+```js
+import React, { useState } from 'react';
+import { images } from '../constants/index.jsx';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+
+const NavItemsInfo = [
+  { name: 'Home', type: 'link' },
+  { name: 'Articles', type: 'link' },
+  { name: 'Pages', type: 'dropdown', items: ['About us', 'Contact us'] },
+  { name: 'Pricing', type: 'link' },
+  { name: 'Faq', type: 'link' },
+];
+
+const NavItem = ({ item }) => {
+  const { type, name } = item;
+  return (
+    <li className="relative group">
+      {type === 'link' ? (
+        <>
+          <a href="/" className="px-4 py-2">
+            {name}
+          </a>
+          <span className="text-blue-500 absolute transition-all duration-500 font-bold right-0 top-0  group-hover:right-[90%] opacity-0 group-hover:opacity-100">
+            /
+          </span>
+        </>
+      ) : (
+        <>
+          <a href="/" className="px-4 py-2 flex gap-x-1 items-center">
+            <span>{name}</span>
+            <MdOutlineKeyboardArrowDown />
+          </a>
+          <div className="hidden transition-all duration-500 pt-4 absolute bottom-0 right-0 transform translate-y-full group-hover:block w-max">
+            <ul className="flex flex-col shadow-lg rounded-lg overflow-hidden">
+              {item.items.map((page) => {
+                return (
+                  <a
+                    href="/"
+                    className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-soft"
+                  >
+                    {page}
+                  </a>
+                );
+              })}
+            </ul>
+          </div>
+        </>
+      )}
+    </li>
+  );
+};
+
+const Header = () => {
+  const [navIsVisible, setNavIsVisible] = useState(false);
+
+  const navigationVisibleHandler = () => {
+    setNavIsVisible((curState) => {
+      return !curState;
+    });
+  };
+
+  return (
+    <section>
+      <header className="container mx-auto px-5 flex justify-between py-4 items-center">
+        <div>
+          <img className="w-16" src={images.Logo} alt="logo image" />
+        </div>
+        <div className="lg:hidden z-50">
+          {navIsVisible ? (
+            <AiOutlineClose
+              className="w-6 h-6"
+              onClick={navigationVisibleHandler}
+            />
+          ) : (
+            <AiOutlineMenu
+              className="w-6 h-6"
+              onClick={navigationVisibleHandler}
+            />
+          )}
+        </div>
+        <div
+          className={`${
+            navIsVisible ? 'right-0' : '-right-full'
+          } transition-all duration-300 mt-[56px] lg:mt-0 bg-dark-hard lg:bg-transparent z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0  lg:static gap-x-9 items-center`}
+        >
+          <ul className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold">
+            {NavItemsInfo.map((item) => {
+              const { name } = item;
+              return <NavItem key={name} item={item} />;
+            })}
+          </ul>
+          <button className="mt-5 lg:mt-0 border-2 border-blue-500 px-6 py-2 rounded-full text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300">
+            Sign in
+          </button>
+        </div>
+      </header>
+    </section>
+  );
+};
+
+export default Header;
+```
+
+### MERN stack Blog app using Tailwind CSS - 5 - Hero Section
 
 # SPECIAL FEATURES USED in This Document
 
